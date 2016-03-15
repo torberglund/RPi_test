@@ -20,7 +20,6 @@ try:
         for dc in range(100, -1, -4):  # Decrease duty cycle: 100~0
             p.ChangeDutyCycle(dc)
             time.sleep(0.05)
-        time.sleep(1)
 except KeyboardInterrupt:
     p.stop()
     GPIO.output(LedPin, GPIO.HIGH)  # turn off all leds
