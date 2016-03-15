@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 import time
 
-RelayPin = 11  # pin11
+RelayPin = 12  # pin12?
 
 
 def setup():
