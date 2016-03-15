@@ -4,21 +4,36 @@ import time
 
 BZRPin = 11
 
-GPIO.setmode(GPIO.BOARD)  # Numbers pins by physical location
-GPIO.setup(BZRPin, GPIO.OUT)  # Set pin mode as output
-GPIO.output(BZRPin, GPIO.LOW)
+
+def setup():
+    GPIO.setmode(GPIO.BOARD)  # Numbers pins by physical location
+    GPIO.setup(BZRPin, GPIO.OUT)  # Set pin mode as output
+    GPIO.output(BZRPin, GPIO.LOW)
+
 
 p = GPIO.PWM(BZRPin, 50)  # init frequency: 50HZ
-p.start(60)  # Duty cycle: 50%
+p.start(50)  # Duty cycle: 50%
 
-try:
+
+def loop():
+    f=100
     while True:
-        for f in range(100, 2000, 100):
-            p.ChangeFrequency(f)
-            time.sleep(0.2)
-        for f in range(2000, 100, -100):
-            p.ChangeFrequency(f)
-            time.sleep(0.2)
-except KeyboardInterrupt:
+        tx = input()
+        if tx <=20 and tx >=1:
+            p.ChangeFrequency(f*tx)
+        if tx==0:
+            destroy()
+
+
+def destroy():
     p.stop()
     GPIO.cleanup()
+
+
+if __name__ == '__main__':  # Program start from here
+    print 'Press Ctrl+C to end the program...'
+    setup()
+    try:
+        loop()
+    except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
+        destroy()
