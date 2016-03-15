@@ -11,8 +11,8 @@ def setup():
     GPIO.output(BZRPin, GPIO.LOW)
 
 
-p = GPIO.PWM(BZRPin, 50)  # init frequency: 50HZ
-p.start(50)  # Duty cycle: 50%
+    p = GPIO.PWM(BZRPin, 50)  # init frequency: 50HZ
+    p.start(50)  # Duty cycle: 50%
 
 
 def loop():
