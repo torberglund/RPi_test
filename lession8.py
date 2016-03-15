@@ -23,4 +23,4 @@ try:
 except KeyboardInterrupt:
     p.stop()
     GPIO.output(LedPin, GPIO.HIGH)  # turn off all leds
-    GPIO.cleanup()
+    GPIO.cleanup() 
