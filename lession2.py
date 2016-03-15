@@ -16,10 +16,9 @@ def setup():
 def loop():
     while True:
         tx = raw_input()
-        if tx=="1":
-            GPIO.output(BeepPin, GPIO.LOW)
-        else:
-            GPIO.output(BeepPin, GPIO.HIGH)
+        GPIO.output(BeepPin, GPIO.LOW)
+        tx = raw_input()
+        GPIO.output(BeepPin, GPIO.HIGH)
 
 def destroy():
     GPIO.output(BeepPin, GPIO.HIGH)  # beep off
