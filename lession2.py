@@ -24,7 +24,7 @@ def loop():
         GPIO.output(BeepPin, GPIO.LOW)
         time.sleep(0.2)
         GPIO.output(BeepPin, GPIO.HIGH)
-        time.sleep(0.2)
+        time.sleep(0.4)
 
         GPIO.output(BeepPin, GPIO.LOW)
         time.sleep(0.4)
@@ -33,7 +33,7 @@ def loop():
         GPIO.output(BeepPin, GPIO.LOW)
         time.sleep(0.4)
         GPIO.output(BeepPin, GPIO.HIGH)
-        time.sleep(0.2)
+        time.sleep(0.4)
 
         GPIO.output(BeepPin, GPIO.LOW)
         time.sleep(0.2)
