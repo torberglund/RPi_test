@@ -14,7 +14,7 @@ def setup():
 def loop():
     while True:
         GPIO.output(BeepPin, GPIO.LOW)
-        time.sleep(0.1)
+        time.sleep(0.5)
         GPIO.output(BeepPin, GPIO.HIGH)
         time.sleep(0.1)
 
