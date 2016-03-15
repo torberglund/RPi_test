@@ -13,14 +13,15 @@ def setup():
 
     p = GPIO.PWM(BZRPin, 50)  # init frequency: 50HZ
     p.start(50)  # Duty cycle: 50%
+    return p
 
 
-def loop():
+def loop(x):
     f=100
     while True:
         tx = input()
         if tx <=20 and tx >=1:
-            p.ChangeFrequency(f*tx)
+            x.ChangeFrequency(f*tx)
         if tx==0:
             destroy()
 
@@ -32,8 +33,8 @@ def destroy():
 
 if __name__ == '__main__':  # Program start from here
     print 'Press Ctrl+C to end the program...'
-    setup()
+    xn= setup()
     try:
-        loop()
+        loop(xn)
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
         destroy()
