@@ -23,7 +23,7 @@ def loop(x):
         if tx <=20 and tx >=1:
             x.ChangeFrequency(f*tx)
         if tx==0:
-            destroy()
+            destroy(x)
 
 
 def destroy(x):
