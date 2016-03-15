@@ -26,8 +26,8 @@ def loop(x):
             destroy()
 
 
-def destroy():
-    p.stop()
+def destroy(x):
+    x.stop()
     GPIO.cleanup()
 
 
@@ -37,4 +37,4 @@ if __name__ == '__main__':  # Program start from here
     try:
         loop(xn)
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
-        destroy()
+        destroy(xn)
