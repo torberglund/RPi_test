@@ -9,7 +9,7 @@ GPIO.setup(BZRPin, GPIO.OUT)  # Set pin mode as output
 GPIO.output(BZRPin, GPIO.LOW)
 
 p = GPIO.PWM(BZRPin, 50)  # init frequency: 50HZ
-p.start(50)  # Duty cycle: 50%
+p.start(60)  # Duty cycle: 50%
 
 try:
     while True:
