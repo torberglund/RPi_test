@@ -22,10 +22,10 @@ try:
     while True:
         print '...led on'
         GPIO.output(LedPin, GPIO.LOW)  # led on
-        time.sleep(0.1)
+        time.sleep(1)
         print 'led off...'
         GPIO.output(LedPin, GPIO.HIGH)  # led off
-        time.sleep(0.1)
+        time.sleep(1)
 except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the flowing code will be  executed.
     GPIO.output(LedPin, GPIO.HIGH)  # led off
     GPIO.cleanup()  # Release resource
