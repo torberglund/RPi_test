@@ -6,6 +6,7 @@ BZRPin = 11
 
 
 def setup():
+    GPIO.cleanup()
     GPIO.setmode(GPIO.BOARD)  # Numbers pins by physical location
     GPIO.setup(BZRPin, GPIO.OUT)  # Set pin mode as output
     GPIO.output(BZRPin, GPIO.LOW)
