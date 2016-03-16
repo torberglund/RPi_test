@@ -11,7 +11,7 @@ class keypad():
         [7, 8, 9],
         ["*", 0, "#"]
     ]
-
+    BZRPin = 7
     ROW = [11, 12, 13, 15]
     COLUMN = [16, 18, 22]
 
@@ -24,6 +24,7 @@ class keypad():
         for j in range(len(self.COLUMN)):
             GPIO.setup(self.COLUMN[j], GPIO.OUT)
             GPIO.output(self.COLUMN[j], GPIO.LOW)
+
 
         # Set all rows as input
         for i in range(len(self.ROW)):
@@ -74,15 +75,26 @@ class keypad():
         for j in range(len(self.COLUMN)):
             GPIO.setup(self.COLUMN[j], GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
+    def setupBzr(self):
+        GPIO.setup(7, GPIO.OUT)  # Set pin mode as output
+        GPIO.output(7, GPIO.LOW)
+        p = GPIO.PWM(7, 50)  # init frequency: 50HZ
+        p.start(50)  # Duty cycle: 50%
+        return p
+
+
+
+
 
 if __name__ == '__main__':
     # Initialize the keypad class
     kp = keypad()
+    s = kp.setupBzr()
     # Loop while waiting for a keypress
     while True:
         digit = None
         while digit == None:
             digit = kp.getKey()
         # Print the result
-        print digit
+        s.ChangeFrequency(digit*100)
         time.sleep(0.5)
