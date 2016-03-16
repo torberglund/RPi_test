@@ -30,9 +30,9 @@ try:
     while True:
         d= checkdist()
         print d
-        if d<0.25:
+        if d<0.25 :
             print 'Distance: %0.2f m' % checkdist()
-            p.ChangeFrequency((1-(d/0.30))*700)
+            p.ChangeFrequency((1-(d/0.30))*400)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
