@@ -2,9 +2,9 @@
 import RPi.GPIO as GPIO
 import time
 
-RCLK = 11
-SRCLK = 12
-SDI = 13
+RCLK = 10
+SRCLK = 11
+SDI = 12
 
 code_H = [0x01, 0xff, 0x80, 0xff, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
           0xff, 0xff]
@@ -22,9 +22,9 @@ def setup():
     GPIO.setup(SDI, GPIO.OUT)
     GPIO.setup(RCLK, GPIO.OUT)
     GPIO.setup(SRCLK, GPIO.OUT)
-    GPIO.output(SDI, GPIO.HIGH)
-    GPIO.output(RCLK, GPIO.HIGH)
-    GPIO.output(SRCLK, GPIO.HIGH)
+    GPIO.output(SDI, GPIO.LOW)
+    GPIO.output(RCLK, GPIO.LOW)
+    GPIO.output(SRCLK, GPIO.LOW)
 
 
 def hc595_in(dat):
