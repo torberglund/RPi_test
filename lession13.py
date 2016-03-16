@@ -79,7 +79,7 @@ class keypad():
         GPIO.setup(7, GPIO.OUT)  # Set pin mode as output
         GPIO.output(7, GPIO.LOW)
         p = GPIO.PWM(7, 50)  # init frequency: 50HZ
-        p.start(50)  # Duty cycle: 50%
+        p.start(80)  # Duty cycle: 50%
         return p
 
 
