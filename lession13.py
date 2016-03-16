@@ -6,14 +6,14 @@ import time
 class keypad():
     # CONSTANTS
     KEYPAD = [
-        [1, 2, 3, "A"],
-        [4, 5, 6, "B"],
-        [7, 8, 9, "C"],
-        ["*", 0, "#", "D"]
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+        ["*", 0, "#"]
     ]
 
     ROW = [11, 12, 13, 15]
-    COLUMN = [16, 18, 22, 7]
+    COLUMN = [16, 18, 22]
 
     def __init__(self):
         GPIO.setmode(GPIO.BOARD)
@@ -59,7 +59,7 @@ class keypad():
                 colVal = j
 
         # if colVal is not 0 thru 2 then no button was pressed and we can exit
-        if colVal < 0 or colVal > 3:
+        if colVal < 0 or colVal > 2:
             self.exit()
             return
 
