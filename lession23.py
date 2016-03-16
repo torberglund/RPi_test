@@ -56,7 +56,7 @@ def loop():
     while True:
 
         print "forward..."
-        forward(0.002, 256)
+        forward(0.005, 256)
 
         print "stop..."
         stop()
