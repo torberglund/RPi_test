@@ -59,10 +59,10 @@ def loop():
 
         print "stop..."
         stop()  # stop
-        time.sleep(3)  # sleep 3s  
+        time.sleep(3)  # sleep 3s
 
         print "forward..."
-        forward(0.005, 512)
+        forward(0.002, 512)
 
         print "stop..."
         stop()
