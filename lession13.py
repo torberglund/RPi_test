@@ -98,3 +98,4 @@ if __name__ == '__main__':
         # Print the result
         s.ChangeFrequency(digit*100)
         time.sleep(0.5)
+        s.ChangeFrequency(0)
