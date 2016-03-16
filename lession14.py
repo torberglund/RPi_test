@@ -26,6 +26,7 @@ GPIO.output(11, GPIO.HIGH)
 
 
 try:
+    print "hej"
     while True:
         d= checkdist()
         if d<0.30 :
