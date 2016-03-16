@@ -19,21 +19,19 @@ def checkdist():
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(18, GPIO.IN)
-time.sleep(2)
 
-GPIO.setup(11, GPIO.OUT)   # Set pin mode as output
+GPIO.setup(11, GPIO.OUT)  # Set pin mode as output
 GPIO.output(11, GPIO.HIGH)
-
 
 try:
     print "hej"
     while True:
-        d= checkdist()
+        d = checkdist()
         print d
-        if d<0.30 :
+        if d < 0.30:
             print 'Distance: %0.2f m' % d
             GPIO.output(13, GPIO.LOW)
-            time.sleep((d/0.30)*1)
+            time.sleep((d / 0.30) * 1)
             GPIO.output(13, GPIO.HIGH)
 
 
