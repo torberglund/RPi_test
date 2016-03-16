@@ -96,9 +96,9 @@ def btnScan():
 
 def loop():
     while True:
-        #		print 'test....2...'
+        print 'test....2...'
         btnScan()
-        #		print 'test....3...'
+        print 'test....3...'
         global g_sta
         global g_dir
         global speed
