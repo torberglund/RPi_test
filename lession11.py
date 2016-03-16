@@ -52,23 +52,22 @@ class Adafruit_CharLCD:
     LCD_5x10DOTS = 0x04
     LCD_5x8DOTS = 0x00
 
-    def __init__(self, pin_rs=24, pin_e=23, pins_db=[17, 18, 27, 22], GPIO=None):
+    def __init__(self, pin_rs=27, pin_e=22, pins_db=[25, 24, 23, 18], GPIO=None):
         # Emulate the old behavior of using RPi.GPIO if we haven't been given
         # an explicit GPIO interface to use
         if not GPIO:
             import RPi.GPIO as GPIO
-        self.GPIO = GPIO
-        self.pin_rs = pin_rs
-        self.pin_e = pin_e
-        self.pins_db = pins_db
+            self.GPIO = GPIO
+            self.pin_rs = pin_rs
+            self.pin_e = pin_e
+            self.pins_db = pins_db
 
-        self.GPIO.setwarnings(False)
-        self.GPIO.setmode(GPIO.BCM)
-        self.GPIO.setup(self.pin_e, GPIO.OUT)
-        self.GPIO.setup(self.pin_rs, GPIO.OUT)
+            self.GPIO.setmode(GPIO.BCM)
+            self.GPIO.setup(self.pin_e, GPIO.OUT)
+            self.GPIO.setup(self.pin_rs, GPIO.OUT)
 
-        for pin in self.pins_db:
-            self.GPIO.setup(pin, GPIO.OUT)
+            for pin in self.pins_db:
+                self.GPIO.setup(pin, GPIO.OUT)
 
         self.write4bits(0x33)  # initialization
         self.write4bits(0x32)  # initialization
@@ -87,148 +86,187 @@ class Adafruit_CharLCD:
 
         self.clear()
 
-    def begin(self, cols, lines):
 
-        if (lines > 1):
-            self.numlines = lines
-            self.displayfunction |= self.LCD_2LINE
-            self.currline = 0
+def begin(self, cols, lines):
+    if (lines > 1):
+        self.numlines = lines
+        self.displayfunction |= self.LCD_2LINE
+        self.currline = 0
 
-    def home(self):
 
-        self.write4bits(self.LCD_RETURNHOME)  # set cursor position to zero
-        self.delayMicroseconds(3000)  # this command takes a long time!
+def home(self):
+    self.write4bits(self.LCD_RETURNHOME)  # set cursor position to zero
+    self.delayMicroseconds(3000)  # this command takes a long time!
 
-    def clear(self):
 
-        self.write4bits(self.LCD_CLEARDISPLAY)  # command to clear display
-        self.delayMicroseconds(3000)  # 3000 microsecond sleep, clearing the display takes a long time
+def clear(self):
+    self.write4bits(self.LCD_CLEARDISPLAY)  # command to clear display
+    self.delayMicroseconds(3000)  # 3000 microsecond sleep, clearing the display takes a long time
 
-    def setCursor(self, col, row):
 
-        self.row_offsets = [0x00, 0x40, 0x14, 0x54]
+def setCursor(self, col, row):
+    self.row_offsets = [0x00, 0x40, 0x14, 0x54]
 
-        if (row > self.numlines):
-            row = self.numlines - 1  # we count rows starting w/0
+    if (row > self.numlines):
+        row = self.numlines - 1  # we count rows starting w/0
 
-        self.write4bits(self.LCD_SETDDRAMADDR | (col + self.row_offsets[row]))
+    self.write4bits(self.LCD_SETDDRAMADDR | (col + self.row_offsets[row]))
 
-    def noDisplay(self):
-        """ Turn the display off (quickly) """
 
-        self.displaycontrol &= ~self.LCD_DISPLAYON
-        self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
+def noDisplay(self):
+    """ Turn the display off (quickly) """
 
-    def display(self):
-        """ Turn the display on (quickly) """
+    self.displaycontrol &= ~self.LCD_DISPLAYON
+    self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
 
-        self.displaycontrol |= self.LCD_DISPLAYON
-        self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
 
-    def noCursor(self):
-        """ Turns the underline cursor on/off """
+def display(self):
+    """ Turn the display on (quickly) """
 
-        self.displaycontrol &= ~self.LCD_CURSORON
-        self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
+    self.displaycontrol |= self.LCD_DISPLAYON
+    self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
 
-    def cursor(self):
-        """ Cursor On """
 
-        self.displaycontrol |= self.LCD_CURSORON
-        self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
+def noCursor(self):
+    """ Turns the underline cursor on/off """
 
-    def noBlink(self):
-        """ Turn on and off the blinking cursor """
+    self.displaycontrol &= ~self.LCD_CURSORON
+    self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
 
-        self.displaycontrol &= ~self.LCD_BLINKON
-        self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
 
-    def noBlink(self):
-        """ Turn on and off the blinking cursor """
+def cursor(self):
 
-        self.displaycontrol &= ~self.LCD_BLINKON
-        self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
 
-    def DisplayLeft(self):
-        """ These commands scroll the display without changing the RAM """
+    """ Cursor On """
 
-        self.write4bits(self.LCD_CURSORSHIFT | self.LCD_DISPLAYMOVE | self.LCD_MOVELEFT)
+    self.displaycontrol |= self.LCD_CURSORON
+    self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
 
-    def scrollDisplayRight(self):
-        """ These commands scroll the display without changing the RAM """
 
-        self.write4bits(self.LCD_CURSORSHIFT | self.LCD_DISPLAYMOVE | self.LCD_MOVERIGHT);
+def noBlink(self):
 
-    def leftToRight(self):
-        """ This is for text that flows Left to Right """
 
-        self.displaymode |= self.LCD_ENTRYLEFT
-        self.write4bits(self.LCD_ENTRYMODESET | self.displaymode);
+    """ Turn on and off the blinking cursor """
 
-    def rightToLeft(self):
-        """ This is for text that flows Right to Left """
-        self.displaymode &= ~self.LCD_ENTRYLEFT
-        self.write4bits(self.LCD_ENTRYMODESET | self.displaymode)
+    self.displaycontrol &= ~self.LCD_BLINKON
+    self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
 
-    def autoscroll(self):
-        """ This will 'right justify' text from the cursor """
 
-        self.displaymode |= self.LCD_ENTRYSHIFTINCREMENT
-        self.write4bits(self.LCD_ENTRYMODESET | self.displaymode)
+def noBlink(self):
 
-    def noAutoscroll(self):
-        """ This will 'left justify' text from the cursor """
 
-        self.displaymode &= ~self.LCD_ENTRYSHIFTINCREMENT
-        self.write4bits(self.LCD_ENTRYMODESET | self.displaymode)
+    """ Turn on and off the blinking cursor """
 
-    def write4bits(self, bits, char_mode=False):
-        """ Send command to LCD """
+    self.displaycontrol &= ~self.LCD_BLINKON
+    self.write4bits(self.LCD_DISPLAYCONTROL | self.displaycontrol)
 
-        self.delayMicroseconds(1000)  # 1000 microsecond sleep
 
-        bits = bin(bits)[2:].zfill(8)
+def DisplayLeft(self):
 
-        self.GPIO.output(self.pin_rs, char_mode)
 
-        for pin in self.pins_db:
-            self.GPIO.output(pin, False)
+    """ These commands scroll the display without changing the RAM """
 
-        for i in range(4):
-            if bits[i] == "1":
-                self.GPIO.output(self.pins_db[::-1][i], True)
+    self.write4bits(self.LCD_CURSORSHIFT | self.LCD_DISPLAYMOVE | self.LCD_MOVELEFT)
 
-        self.pulseEnable()
 
-        for pin in self.pins_db:
-            self.GPIO.output(pin, False)
+def scrollDisplayRight(self):
 
-        for i in range(4, 8):
-            if bits[i] == "1":
-                self.GPIO.output(self.pins_db[::-1][i - 4], True)
 
-        self.pulseEnable()
+    """ These commands scroll the display without changing the RAM """
 
-    def delayMicroseconds(self, microseconds):
-        seconds = microseconds / float(1000000)  # divide microseconds by 1 million for seconds
-        sleep(seconds)
+    self.write4bits(self.LCD_CURSORSHIFT | self.LCD_DISPLAYMOVE | self.LCD_MOVERIGHT);
 
-    def pulseEnable(self):
-        self.GPIO.output(self.pin_e, False)
-        self.delayMicroseconds(1)  # 1 microsecond pause - enable pulse must be > 450ns
-        self.GPIO.output(self.pin_e, True)
-        self.delayMicroseconds(1)  # 1 microsecond pause - enable pulse must be > 450ns
-        self.GPIO.output(self.pin_e, False)
-        self.delayMicroseconds(1)  # commands need > 37us to settle
 
-    def message(self, text):
-        """ Send string to LCD. Newline wraps to second line"""
+def leftToRight(self):
 
-        for char in text:
-            if char == '\n':
-                self.write4bits(0xC0)  # next line
-            else:
-                self.write4bits(ord(char), True)
+
+    """ This is for text that flows Left to Right """
+
+    self.displaymode |= self.LCD_ENTRYLEFT
+    self.write4bits(self.LCD_ENTRYMODESET | self.displaymode);
+
+
+def rightToLeft(self):
+
+
+    """ This is for text that flows Right to Left """
+    self.displaymode &= ~self.LCD_ENTRYLEFT
+    self.write4bits(self.LCD_ENTRYMODESET | self.displaymode)
+
+
+def autoscroll(self):
+
+
+    """ This will 'right justify' text from the cursor """
+
+    self.displaymode |= self.LCD_ENTRYSHIFTINCREMENT
+    self.write4bits(self.LCD_ENTRYMODESET | self.displaymode)
+
+
+def noAutoscroll(self):
+
+
+    """ This will 'left justify' text from the cursor """
+
+    self.displaymode &= ~self.LCD_ENTRYSHIFTINCREMENT
+    self.write4bits(self.LCD_ENTRYMODESET | self.displaymode)
+
+
+def write4bits(self, bits, char_mode=False):
+    """ Send command to LCD """
+
+
+    self.delayMicroseconds(1000)  # 1000 microsecond sleep
+
+    bits = bin(bits)[2:].zfill(8)
+
+    self.GPIO.output(self.pin_rs, char_mode)
+
+    for pin in self.pins_db:
+        self.GPIO.output(pin, False)
+
+    for i in range(4):
+        if bits[i] == "1":
+            self.GPIO.output(self.pins_db[::-1][i], True)
+
+    self.pulseEnable()
+
+    for pin in self.pins_db:
+        self.GPIO.output(pin, False)
+
+    for i in range(4, 8):
+        if bits[i] == "1":
+            self.GPIO.output(self.pins_db[::-1][i - 4], True)
+
+    self.pulseEnable()
+
+
+def delayMicroseconds(self, microseconds):
+
+
+    seconds = microseconds / float(1000000)  # divide microseconds by 1 million for seconds
+    sleep(seconds)
+
+
+def pulseEnable(self):
+
+
+    self.GPIO.output(self.pin_e, False)
+    self.delayMicroseconds(1)  # 1 microsecond pause - enable pulse must be > 450ns
+    self.GPIO.output(self.pin_e, True)
+    self.delayMicroseconds(1)  # 1 microsecond pause - enable pulse must be > 450ns
+    self.GPIO.output(self.pin_e, False)
+    self.delayMicroseconds(1)  # commands need > 37us to settle
+
+
+def message(self, text):
+    """ Send string to LCD. Newline wraps to second line"""
+
+    for char in text:
+        if char == '\n':
+            self.write4bits(0xC0)  # next line
+        else:
+            self.write4bits(ord(char), True)
 
 
 def loop():
@@ -238,10 +276,10 @@ def loop():
         lcd.message(" LCD 1602 Test \n123456789ABCDEF")
         sleep(2)
         lcd.clear()
-        lcd.message("   Hello, geeks !\nHello World ! :)")
+        lcd.message("   SUNFOUNDER \nHello World ! :)")
         sleep(2)
         lcd.clear()
-        lcd.message("Welcom to --->\n  adeept.com")
+        lcd.message("Welcom to --->\n  sunfounder.com")
         sleep(2)
 
 
