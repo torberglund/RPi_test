@@ -21,7 +21,7 @@ GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(18, GPIO.IN)
 
 GPIO.setup(13, GPIO.OUT)  # Set pin mode as output
-GPIO.output(13, GPIO.HIGH)
+GPIO.output(13, GPIO.LOW)
 
 try:
     print "hej"
@@ -30,13 +30,13 @@ try:
         print d
         if d < 0.6:
             print 'Distance: %0.2f m' % d
-            GPIO.output(13, GPIO.LOW)
+            GPIO.output(13, GPIO.HIGH)
             print "led on"
             time.sleep((d / 0.6) * 2)
-            GPIO.output(13, GPIO.HIGH)
+            GPIO.output(13, GPIO.LOW)
             print "led off"
         else:
-            GPIO.output(13,GPIO.LOW)
+            GPIO.output(13,GPIO.HIGH)
 
 
 
