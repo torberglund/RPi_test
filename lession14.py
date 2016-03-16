@@ -31,7 +31,7 @@ try:
         if d<0.30 :
             print 'Distance: %0.2f m' % d
             GPIO.output(13, GPIO.LOW)
-            time.sleep((d/0.30)*10)
+            time.sleep((d/0.30)*1)
             GPIO.output(13, GPIO.HIGH)
 
 
