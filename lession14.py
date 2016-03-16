@@ -28,13 +28,13 @@ try:
     while True:
         d = checkdist()
         print d
-        if d < 0.3:
+        if d < 1:
             print 'Distance: %0.2f m' % d
             GPIO.output(13, GPIO.LOW)
             print "led on"
-            time.sleep((d / 0.3) * 2)
+            time.sleep((d / 1) * 2)
             GPIO.output(13, GPIO.HIGH)
-            time.sleep((d / 0.3) * 2)
+            time.sleep((d / 1) * 2)
             print "led off"
 
 
