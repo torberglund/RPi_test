@@ -20,8 +20,8 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(18, GPIO.IN)
 
-GPIO.setup(11, GPIO.OUT)  # Set pin mode as output
-GPIO.output(11, GPIO.HIGH)
+GPIO.setup(13, GPIO.OUT)  # Set pin mode as output
+GPIO.output(13, GPIO.HIGH)
 
 try:
     print "hej"
