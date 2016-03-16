@@ -20,11 +20,18 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(18, GPIO.IN)
 time.sleep(2)
+
+GPIO.setup(7, GPIO.OUT)   # Set pin mode as output
+GPIO.output(7, GPIO.LOW)
+
+p = GPIO.PWM(7, 50) # init frequency: 50HZ
+p.start(50)  # Duty cycle: 50%
 try:
     while True:
         d= checkdist()
         if d<1:
             print 'Distance: %0.2f m' % checkdist()
-            time.sleep(0.5)
+            p.ChangeFrequency((1-d/0.24)*700)
+            
 except KeyboardInterrupt:
     GPIO.cleanup()
