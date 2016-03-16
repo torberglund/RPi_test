@@ -22,9 +22,9 @@ def setup():
     GPIO.setup(SDI, GPIO.OUT)
     GPIO.setup(RCLK, GPIO.OUT)
     GPIO.setup(SRCLK, GPIO.OUT)
-    GPIO.output(SDI, GPIO.LOW)
-    GPIO.output(RCLK, GPIO.LOW)
-    GPIO.output(SRCLK, GPIO.LOW)
+    GPIO.output(SDI, GPIO.HIGH)
+    GPIO.output(RCLK, GPIO.HIGH)
+    GPIO.output(SRCLK, GPIO.HIGH)
 
 
 def hc595_in(dat):
