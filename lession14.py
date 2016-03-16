@@ -32,7 +32,7 @@ try:
         if d<0.30 :
             print 'Distance: %0.2f m' % d
             p.ChangeFrequency((1-(d/0.30))*400)
-            time.sleep(0.3)
+            time.sleep(0.05)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
