@@ -97,6 +97,22 @@ if __name__ == '__main__':
             digit = kp.getKey()
         # Print the result
         s.start(50)
-        s.ChangeFrequency(digit*100)
-        time.sleep(0.5)
+
+        if digit==1:
+            s.ChangeFrequency(392)
+        elif digit==2:
+            s.ChangeFrequency(440)
+        elif digit==3:
+            s.ChangeFrequency(493.88)
+        elif digit==4:
+            s.ChangeFrequency(523.25)
+        elif digit==5:
+            s.ChangeFrequency(587.33)
+        elif digit==6:
+            s.ChangeFrequency(659.25)
+        elif digit==7:
+            s.ChangeFrequency(698.46)
+
+
+        time.sleep(0.3)
         s.stop()
