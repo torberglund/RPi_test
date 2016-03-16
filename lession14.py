@@ -34,7 +34,7 @@ try:
             print "led on"
             time.sleep((d / 0.3) * 2)
             GPIO.output(13, GPIO.HIGH)
-            time.sleep((d / 0.6) * 2)
+            time.sleep((d / 0.3) * 2)
             print "led off"
 
 
