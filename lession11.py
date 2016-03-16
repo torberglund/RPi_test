@@ -68,12 +68,12 @@ class Adafruit_CharLCD:
 
             for pin in self.pins_db:
                 self.GPIO.setup(pin, GPIO.OUT)
-
-        self.write4bits(0x33)  # initialization
-        self.write4bits(0x32)  # initialization
-        self.write4bits(0x28)  # 2 line 5x7 matrix
-        self.write4bits(0x0C)  # turn cursor off 0x0E to enable cursor
-        self.write4bits(0x06)  # shift cursor right
+        #
+        # self.write4bits(0x33)  # initialization
+        # self.write4bits(0x32)  # initialization
+        # self.write4bits(0x28)  # 2 line 5x7 matrix
+        # self.write4bits(0x0C)  # turn cursor off 0x0E to enable cursor
+        # self.write4bits(0x06)  # shift cursor right
 
         self.displaycontrol = self.LCD_DISPLAYON | self.LCD_CURSOROFF | self.LCD_BLINKOFF
 
