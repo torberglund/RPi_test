@@ -1,88 +1,89 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 import RPi.GPIO as GPIO
 import time
 
 
-class keypad():
-    # CONSTANTS
-    KEYPAD = [
-        [1, 2, 3, "A"],
-        [4, 5, 6, "B"],
-        [7, 8, 9, "C"],
-        ["*", 0, "#", "D"]
-    ]
-
-    ROW = [11, 12, 13, 15]
-    COLUMN = [16, 18, 22, 7]
-
-    def __init__(self):
-        GPIO.setmode(GPIO.BOARD)
-
-    def getKey(self):
-
-        # Set all columns as output low
-        for j in range(len(self.COLUMN)):
-            GPIO.setup(self.COLUMN[j], GPIO.OUT)
-            GPIO.output(self.COLUMN[j], GPIO.LOW)
-
-        # Set all rows as input
-        for i in range(len(self.ROW)):
-            GPIO.setup(self.ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-        # Scan rows for pushed key/button
-        # A valid key press should set "rowVal"  between 0 and 3.
-        rowVal = -1
-        for i in range(len(self.ROW)):
-            tmpRead = GPIO.input(self.ROW[i])
-            if tmpRead == 0:
-                rowVal = i
-
-        # if rowVal is not 0 thru 3 then no button was pressed and we can exit
-        if rowVal < 0 or rowVal > 3:
-            self.exit()
-            return
-
-        # Convert columns to input
-        for j in range(len(self.COLUMN)):
-            GPIO.setup(self.COLUMN[j], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-        # Switch the i-th row found from scan to output
-        GPIO.setup(self.ROW[rowVal], GPIO.OUT)
-        GPIO.output(self.ROW[rowVal], GPIO.HIGH)
-
-        # Scan columns for still-pushed key/button
-        # A valid key press should set "colVal"  between 0 and 2.
-        colVal = -1
-        for j in range(len(self.COLUMN)):
-            tmpRead = GPIO.input(self.COLUMN[j])
-            if tmpRead == 1:
-                colVal = j
-
-        # if colVal is not 0 thru 2 then no button was pressed and we can exit
-        if colVal < 0 or colVal > 3:
-            self.exit()
-            return
-
-        # Return the value of the key pressed
-        self.exit()
-        return self.KEYPAD[rowVal][colVal]
-
-    def exit(self):
-        # Reinitialize all rows and columns as input at exit
-        for i in range(len(self.ROW)):
-            GPIO.setup(self.ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        for j in range(len(self.COLUMN)):
-            GPIO.setup(self.COLUMN[j], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+def bin2dec(string_num):
+    return str(int(string_num, 2))
 
 
-if __name__ == '__main__':
-    # Initialize the keypad class
-    kp = keypad()
-    # Loop while waiting for a keypress
-    while True:
-        digit = None
-        while digit == None:
-            digit = kp.getKey()
-        # Print the result
-        print digit
-        time.sleep(0.5)
+data = []
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(4, GPIO.OUT)
+GPIO.output(4, GPIO.HIGH)
+time.sleep(0.025)
+GPIO.output(4, GPIO.LOW)
+time.sleep(0.02)
+
+GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+for i in range(0, 500):
+    data.append(GPIO.input(4))
+
+bit_count = 0
+tmp = 0
+count = 0
+HumidityBit = ""
+TemperatureBit = ""
+crc = ""
+
+try:
+    while data[count] == 1:
+        tmp = 1
+        count = count + 1
+
+    for i in range(0, 32):
+        bit_count = 0
+
+    while data[count] == 0:
+        tmp = 1
+        count = count + 1
+
+    while data[count] == 1:
+        bit_count = bit_count + 1
+        count = count + 1
+
+    if bit_count > 3:
+        if i >= 0 and i < 8:
+            HumidityBit = HumidityBit + "1"
+        if i >= 16 and i < 24:
+            TemperatureBit = TemperatureBit + "1"
+    else:
+        if i >= 0 and i < 8:
+            HumidityBit = HumidityBit + "0"
+        if i >= 16 and i < 24:
+            TemperatureBit = TemperatureBit + "0"
+
+except:
+    print "ERR_RANGE"
+    exit(0)
+
+try:
+    for i in range(0, 8):
+        bit_count = 0
+
+        while data[count] == 0:
+            tmp = 1
+            count = count + 1
+
+        while data[count] == 1:
+            bit_count = bit_count + 1
+            count = count + 1
+
+        if bit_count > 3:
+            crc = crc + "1"
+        else:
+            crc = crc + "0"
+except:
+    print "ERR_RANGE"
+exit(0)
+
+Humidity = bin2dec(HumidityBit)
+Temperature = bin2dec(TemperatureBit)
+
+if int(Humidity) + int(Temperature) - int(bin2dec(crc)) == 0:
+    print Humidity
+    print Temperature
+else:
+    print "ERR_CRC"
