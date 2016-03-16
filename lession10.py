@@ -97,6 +97,12 @@ def display_3(num):
     else:
         print 'Out of range, num should be 0~9999 !'
 
+def display_4(digit):
+    if (digit <=9 and digit >=0):
+        digitalWriteByte(digit+1)
+    else:
+        print "Error"
+
 
 def setup():
     GPIO.setmode(GPIO.BOARD)  # Number GPIOs by its physical location
@@ -114,9 +120,7 @@ def loop():
         #time.sleep(1)
 
         tmp = int(raw_input('Please input a num(0~9999):'))
-        for i in range(500):
-            display_3(tmp)
-        time.sleep(1)
+        display_4(tmp)
 
 
 def destroy():  # When program ending, the function is executed.
