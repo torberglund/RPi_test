@@ -108,10 +108,10 @@ def setup():
 def loop():
     while True:
         print_msg()
-        display_1()
-        time.sleep(1)
-        display_2()
-        time.sleep(1)
+        #display_1()
+        #time.sleep(1)
+        #display_2()
+        #time.sleep(1)
 
         tmp = int(raw_input('Please input a num(0~9999):'))
         for i in range(500):
