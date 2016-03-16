@@ -31,8 +31,13 @@ try:
         if d < 0.6:
             print 'Distance: %0.2f m' % d
             GPIO.output(13, GPIO.LOW)
+            print "led on"
             time.sleep((d / 0.6) * 0.5)
             GPIO.output(13, GPIO.HIGH)
+            print "led off"
+        else:
+            GPIO.output(13,GPIO.LOW)
+        
 
 
 except KeyboardInterrupt:
