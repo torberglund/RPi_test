@@ -31,7 +31,7 @@ def digitalWriteByte(val):
 
 def display_1():
     GPIO.output(BIT0, GPIO.LOW)
-    for i in range(10):
+    for i in range(16):
         digitalWriteByte(segCode[i])
         time.sleep(0.5)
 
