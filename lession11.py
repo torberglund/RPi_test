@@ -52,7 +52,7 @@ class Adafruit_CharLCD:
     LCD_5x10DOTS = 0x04
     LCD_5x8DOTS = 0x00
 
-    def __init__(self, pin_rs=14, pin_e=15, pins_db=[17, 18, 27, 22], GPIO=None):
+    def __init__(self, pin_rs=18, pin_e=16, pins_db=[11, 12, 13, 15], GPIO=None):
         # Emulate the old behavior of using RPi.GPIO if we haven't been given
         # an explicit GPIO interface to use
         if not GPIO:
