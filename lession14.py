@@ -29,10 +29,10 @@ p.start(50)  # Duty cycle: 50%
 try:
     while True:
         d= checkdist()
-        print d
-        if d<0.25 :
-            print 'Distance: %0.2f m' % checkdist()
+        if d<0.30 :
+            print 'Distance: %0.2f m' % d
             p.ChangeFrequency((1-(d/0.30))*400)
+            sleep(0.3)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
