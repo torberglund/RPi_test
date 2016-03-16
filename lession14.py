@@ -29,6 +29,7 @@ try:
     print "hej"
     while True:
         d= checkdist()
+        print d
         if d<0.30 :
             print 'Distance: %0.2f m' % d
             GPIO.output(13, GPIO.LOW)
