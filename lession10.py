@@ -99,7 +99,7 @@ def display_3(num):
 
 def display_4(digit):
     if (digit <=9 and digit >=0):
-        digitalWriteByte(segCode[digit+1])
+        digitalWriteByte(segCode[digit])
     else:
         print "Error"
 
