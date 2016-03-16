@@ -96,6 +96,7 @@ if __name__ == '__main__':
         while digit == None:
             digit = kp.getKey()
         # Print the result
+        s.start(50)
         s.ChangeFrequency(digit*100)
         time.sleep(0.5)
-        s.ChangeFrequency(0)
+        s.stop()
