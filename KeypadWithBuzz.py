@@ -87,12 +87,15 @@ class keypad():
         for i in range (0,3):
             while digit == None:
                 digit=self.getKey()
+                print "you pressed" +digit
                 pressed[i]=digit
                 digit=None
         # Print the result
         if pressed !=passw:
+            print "does not match password"
             return False
         else:
+            print "matches password"
             return True
 
     def destroy(self):
@@ -115,10 +118,12 @@ if __name__ == '__main__':
         while True:
 
             if kp.checkpass()==False:
+                print "playing error sound"
                 GPIO.output(kp.BeepPin, GPIO.LOW)
                 time.sleep(1)
                 GPIO.output(kp.BeepPin, GPIO.HIGH)
             else:
+                print "playing success sound"
                 GPIO.output(kp.BeepPin, GPIO.LOW)
                 time.sleep(0.2)
                 GPIO.output(kp.BeepPin, GPIO.HIGH)
