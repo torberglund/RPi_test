@@ -87,7 +87,7 @@ class keypad():
         for i in range (0,3):
             while digit == None:
                 digit=self.getKey()
-            print "you pressed" +digit
+            print "you pressed" +str(digit)
             pressed[i]=digit
             digit=None
         # Print the result
