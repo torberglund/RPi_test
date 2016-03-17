@@ -84,7 +84,7 @@ class keypad():
         pressed=[0,0,0,0]
         passw=[1,2,3,4]
         digit=-1
-        for i in range (0,3):
+        for i in range (0,4):
             while digit == -1:
                 digit=self.getKey()
 
