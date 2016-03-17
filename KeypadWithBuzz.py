@@ -87,9 +87,9 @@ class keypad():
         for i in range (0,3):
             while digit == None:
                 digit=self.getKey()
-                print "you pressed" +digit
-                pressed[i]=digit
-                digit=None
+            print "you pressed" +digit
+            pressed[i]=digit
+            digit=None
         # Print the result
         if pressed !=passw:
             print "does not match password"
