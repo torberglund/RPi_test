@@ -78,7 +78,7 @@ class keypad():
     def setupBzr(self):
         GPIO.setmode(GPIO.BOARD)  # Numbers pins by physical location
         GPIO.setup(self.BZRPin, GPIO.OUT)  # Set pin mode as output
-        GPIO.output(self.BZRPin, GPIO.HIGH)
+        GPIO.output(self.BZRPin, GPIO.LOW)
 
     def checkpass(self):
         pressed=[0,0,0,0]
