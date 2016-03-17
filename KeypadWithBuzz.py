@@ -89,6 +89,8 @@ class keypad():
                 digit=self.getKey()
             print "you pressed" +str(digit)
             pressed[i]=digit
+            while self.getKey ==digit:
+                time.sleep(0.1)
             digit=None
         # Print the result
         if pressed !=passw:
@@ -119,13 +121,11 @@ if __name__ == '__main__':
 
             if kp.checkpass()==False:
                 print "playing error sound"
-                GPIO.output(kp.BZRPin, GPIO.LOW)
-                time.sleep(1)
                 GPIO.output(kp.BZRPin, GPIO.HIGH)
+                time.sleep(1)
+                GPIO.output(kp.BZRPin, GPIO.LOW)
             else:
                 print "playing success sound"
-                GPIO.output(kp.BZRPin, GPIO.LOW)
-                time.sleep(0.2)
                 GPIO.output(kp.BZRPin, GPIO.HIGH)
                 time.sleep(0.2)
                 GPIO.output(kp.BZRPin, GPIO.LOW)
@@ -135,6 +135,8 @@ if __name__ == '__main__':
                 GPIO.output(kp.BZRPin, GPIO.LOW)
                 time.sleep(0.2)
                 GPIO.output(kp.BZRPin, GPIO.HIGH)
+                time.sleep(0.2)
+                GPIO.output(kp.BZRPin, GPIO.LOW)
     except KeyboardInterrupt:
         kp.destroy()
 
