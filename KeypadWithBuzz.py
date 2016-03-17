@@ -89,7 +89,7 @@ class keypad():
                 digit=self.getKey()
             print "you pressed" +str(digit)
             pressed[i]=digit
-            while self.getKey !=None:
+            while self.getKey ==digit:
                 time.sleep(0.3)
 
         # Print the result
