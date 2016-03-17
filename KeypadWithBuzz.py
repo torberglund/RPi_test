@@ -12,7 +12,9 @@ class keypad():
         ["*", 0, "#"]
     ]
     BZRPin = 7
-    ROW = [11, 12, 13, 15]
+    RedPin=7
+    GreenPin=15
+    ROW = [11, 12, 13]
     COLUMN = [16, 18, 22]
 
     def __init__(self):
@@ -77,8 +79,10 @@ class keypad():
 
     def setupBzr(self):
         GPIO.setmode(GPIO.BOARD)  # Numbers pins by physical location
-        GPIO.setup(self.BZRPin, GPIO.OUT)  # Set pin mode as output
-        GPIO.output(self.BZRPin, GPIO.LOW)
+        GPIO.setup(self.RedPin, GPIO.OUT)  # Set pin mode as output
+        GPIO.output(self.RedPin, GPIO.HIGH)
+        GPIO.setup(self.GreenPin, GPIO.OUT)  # Set pin mode as output
+        GPIO.output(self.GreenPin, GPIO.HIGH)
 
     def checkpass(self):
         pressed=[0,0,0,0]
@@ -104,7 +108,8 @@ class keypad():
             return True
 
     def destroy(self):
-        GPIO.output(self.BZRPin, GPIO.HIGH)  # beep off
+        GPIO.output(self.GreenPin, GPIO.HIGH)
+        GPIO.output(self.RedPin, GPIO.HIGH)# beep off
         GPIO.cleanup()  # Release resource
 
 
@@ -117,29 +122,21 @@ if __name__ == '__main__':
 
     # Initialize the keypad class
     kp = keypad()
-    kp.setupBzr()
+    kp.setupPins()
     # Loop while waiting for a keypress
     try:
         while True:
 
             if kp.checkpass()==False:
                 print "playing error sound"
-                GPIO.output(kp.BZRPin, GPIO.HIGH)
+                GPIO.output(kp.RedPin, GPIO.LOW)
                 time.sleep(1)
-                GPIO.output(kp.BZRPin, GPIO.LOW)
+                GPIO.output(kp.RedPin, GPIO.HIGH)
             else:
                 print "playing success sound"
-                GPIO.output(kp.BZRPin, GPIO.HIGH)
-                time.sleep(0.2)
-                GPIO.output(kp.BZRPin, GPIO.LOW)
-                time.sleep(0.2)
-                GPIO.output(kp.BZRPin, GPIO.HIGH)
-                time.sleep(0.2)
-                GPIO.output(kp.BZRPin, GPIO.LOW)
-                time.sleep(0.2)
-                GPIO.output(kp.BZRPin, GPIO.HIGH)
-                time.sleep(0.2)
-                GPIO.output(kp.BZRPin, GPIO.LOW)
+                GPIO.output(kp.GreenPin, GPIO.LOW)
+                time.sleep(1)
+                GPIO.output(kp.GreenPin, GPIO.HIGH)
     except KeyboardInterrupt:
         kp.destroy()
 
