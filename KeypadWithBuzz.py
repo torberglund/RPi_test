@@ -119,22 +119,22 @@ if __name__ == '__main__':
 
             if kp.checkpass()==False:
                 print "playing error sound"
-                GPIO.output(kp.BeepPin, GPIO.LOW)
+                GPIO.output(kp.BZRPin, GPIO.LOW)
                 time.sleep(1)
-                GPIO.output(kp.BeepPin, GPIO.HIGH)
+                GPIO.output(kp.BZRPin, GPIO.HIGH)
             else:
                 print "playing success sound"
-                GPIO.output(kp.BeepPin, GPIO.LOW)
+                GPIO.output(kp.BZRPin, GPIO.LOW)
                 time.sleep(0.2)
-                GPIO.output(kp.BeepPin, GPIO.HIGH)
+                GPIO.output(kp.BZRPin, GPIO.HIGH)
                 time.sleep(0.2)
-                GPIO.output(kp.BeepPin, GPIO.LOW)
+                GPIO.output(kp.BZRPin, GPIO.LOW)
                 time.sleep(0.2)
-                GPIO.output(kp.BeepPin, GPIO.HIGH)
+                GPIO.output(kp.BZRPin, GPIO.HIGH)
                 time.sleep(0.2)
-                GPIO.output(kp.BeepPin, GPIO.LOW)
+                GPIO.output(kp.BZRPin, GPIO.LOW)
                 time.sleep(0.2)
-                GPIO.output(kp.BeepPin, GPIO.HIGH)
+                GPIO.output(kp.BZRPin, GPIO.HIGH)
     except KeyboardInterrupt:
         kp.destroy()
 
