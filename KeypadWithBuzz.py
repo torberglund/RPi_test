@@ -97,7 +97,7 @@ class keypad():
 
         # Print the result
         if pressed !=passw:
-            print "does not match password"
+            print str(passw)+" does not match password"
             return False
         else:
             print "matches password"
