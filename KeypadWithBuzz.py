@@ -41,7 +41,7 @@ class keypad():
         # if rowVal is not 0 thru 3 then no button was pressed and we can exit
         if rowVal < 0 or rowVal > 3:
             self.exit()
-            return
+            return -1
 
         # Convert columns to input
         for j in range(len(self.COLUMN)):
@@ -62,7 +62,7 @@ class keypad():
         # if colVal is not 0 thru 2 then no button was pressed and we can exit
         if colVal < 0 or colVal > 2:
             self.exit()
-            return
+            return -1
 
         # Return the value of the key pressed
         self.exit()
@@ -83,14 +83,14 @@ class keypad():
     def checkpass(self):
         pressed=[0,0,0,0]
         passw=[1,2,3,4]
-        digit=None
+        digit=-1
         for i in (0,3):
-            while digit == None:
+            while digit == -1:
                 digit=self.getKey()
 
             print "you pressed" +str(digit)
             pressed[i]=digit
-            while self.getKey ==digit:
+            while self.getKey != -1:
                 print "sleeping"
                 time.sleep(0.3)
 
