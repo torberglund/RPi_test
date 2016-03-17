@@ -77,7 +77,7 @@ class keypad():
         for j in range(len(self.COLUMN)):
             GPIO.setup(self.COLUMN[j], GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-    def setupBzr(self):
+    def setupPins(self):
         GPIO.setmode(GPIO.BOARD)  # Numbers pins by physical location
         GPIO.setup(self.RedPin, GPIO.OUT)  # Set pin mode as output
         GPIO.output(self.RedPin, GPIO.HIGH)
