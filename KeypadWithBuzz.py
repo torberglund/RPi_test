@@ -89,6 +89,7 @@ class keypad():
                 digit=self.getKey()
 
             print "you pressed" +str(digit)
+            print "assigning "+str(digit)+" at position "+str(i)
             pressed[i]=digit
             while digit != -1:
                 digit = self.getKey()
